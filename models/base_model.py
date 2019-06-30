@@ -1,5 +1,6 @@
 #!usr/bin/python3
 """ module for create a base models """
+import models
 from uuid import uuid4
 from datetime import datetime
 
@@ -14,6 +15,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
+            models.storage.new(self)
 
     def __updated_v(self, kwargs):
         for key, val in kwargs.items():
@@ -36,10 +38,12 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.now()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         dicty = self.__dict__.copy()
         dicty.update({'__class__': self.__class__.__name__})
-        dicty['created_at'] = datetime.isoformat(dicty['created_at'])
-        dicty['updated_at'] = datetime.isoformat(dicty['updated_at'])
+        dicty['created_at'] = self.created_at.isoformat()
+        dicty['updated_at'] = self.updated_at.isoformat()
         return dicty
