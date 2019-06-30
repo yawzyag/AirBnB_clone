@@ -28,15 +28,14 @@ class FileStorage:
             write_file.write(json.dumps(listm))
 
     def reload(self):
-        ''' deserializes the JSON file to __objects '''
+        """ deserializes the JSON file to __objects """
         filename = FileStorage.__file_path
         FileStorage.__objects = {}
         try:
             with open(filename) as fileo:
                 objecs = json.loads(fileo.read())
             for key, val in objecs.items():
-                for i, j in val.items():
-                    objecs.update({key : BaseModel({i : j})})
+                objecs.update({key: BaseModel(**val)})
             FileStorage.__objects = objecs
         except:
             pass
