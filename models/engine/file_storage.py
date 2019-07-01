@@ -2,12 +2,15 @@
 """ module for create a file serialization-deserialization """
 import json
 from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
     """ class for manage storage """
     __file_path = "file.json"
     __objects = {}
+
+    dic = {"BaseModel": BaseModel, "User": User}
 
     def all(self):
         """ returns the dictionary """
@@ -33,9 +36,9 @@ class FileStorage:
         FileStorage.__objects = {}
         try:
             with open(filename) as fileo:
-                objecs = json.loads(fileo.read())
+                objecs = json.load(fileo)
             for key, val in objecs.items():
-                objecs.update({key: BaseModel(**val)})
-            FileStorage.__objects = objecs
+                cl = val["__class__"]
+                FileStorage.__objects[key] = FileStorage.dic[cl](**val)
         except:
             pass

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" module to create the console """
 import cmd
 
 
