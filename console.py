@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ module to create the console """
 import cmd
+import json
 from models.base_model import BaseModel
 from models import storage
 
@@ -47,6 +48,30 @@ class HBNBCommand(cmd.Cmd):
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
             print(obj)
+  
+    def do_destroy(self, args):
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        args = args.split()
+        if args[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            if obj_id.split(".")[1] != args[1]:
+                continue
+            del all_objs[obj_id]
+            listm = {}
+            for key, val in all_objs.items():
+                listm.update({key: val.to_dict()})
+            with open(storage._FileStorage__file_path, "w") as write_file:
+                write_file.write(json.dumps(listm))
+            return
+        print("** no instance found **")
 
     def emptyline(self):
         return
