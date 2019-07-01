@@ -39,6 +39,15 @@ class HBNBCommand(cmd.Cmd):
             return
         print("** no instance found **")
 
+    def do_all(self, args):
+        if args != "BaseModel" and len(args) > 0:
+            print("** class doesn't exist **")
+            return
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            obj = all_objs[obj_id]
+            print(obj)
+
     def emptyline(self):
         return
 
