@@ -30,44 +30,51 @@ class TestBaseClass(unittest.TestCase):
     """
 
     def setUp(self):
-        self.my_model = BaseModel()
-        self.my_model.name = "Holberton"
-        self.my_model.my_number = 89
-        self.my_model.juanito = ""
-        self.this_id = self.my_model.id
-        self.this_created = self.my_model.created_at
-        self.this_updated = self.my_model.updated_at
+        self.juan = BaseModel()
+        self.juan.name = "Holberton"
+        self.juan.my_number = 89
+        self.juan.juanito = ""
+        self.this_id = self.juan.id
+        self.this_created = self.juan.created_at
+        self.this_updated = self.juan.updated_at
 
     def tearDown(self):
         pass
 
     def test_name(self):
-        self.assertEqual(self.my_model.name, "Holberton")
+        self.assertEqual(self.juan.name, "Holberton")
 
     def test_number(self):
-        self.assertEqual(self.my_model.my_number, 89)
+        self.assertEqual(self.juan.my_number, 89)
 
     def test_id(self):
-        self.assertEqual(self.this_id, self.my_model.id)
+        self.assertEqual(self.this_id, self.juan.id)
 
     def test_created(self):
-        self.assertEqual(self.this_created, self.my_model.created_at)
+        self.assertEqual(self.this_created, self.juan.created_at)
 
     def test_updated(self):
-        self.assertEqual(self.this_updated, self.my_model.updated_at)
+        self.assertEqual(self.this_updated, self.juan.updated_at)
 
     def test_not_existing(self):
-        self.assertNotEqual(self.my_model.juanito, "no existe")
+        self.assertNotEqual(self.juan.juanito, "no existe")
 
     def test_instance(self):
-        self.assertIsInstance(self.my_model, BaseModel)
+        self.assertIsInstance(self.juan, BaseModel)
 
     def test_save(self):
+        self.juan.save()
         self.assertTrue(os.path.isfile("file.json"))
-        self.assertTrue(hasattr(self.my_model, "save"))
-        self.assertTrue(hasattr(self.my_model, "__init__"))
-        self.assertTrue(hasattr(self.my_model, "to_dict"))
-        self.assertTrue(hasattr(self.my_model, "__str__"))
+        self.assertTrue(hasattr(self.juan, "save"))
+        self.assertTrue(hasattr(self.juan, "__init__"))
+        self.assertTrue(hasattr(self.juan, "to_dict"))
+        self.assertTrue(hasattr(self.juan, "__str__"))
+
+    def test_dict(self):
+        juanito2 = self.juan.to_dict()
+        self.assertEqual(self.juan.__class__.__name__, "BaseModel")
+        self.assertIsInstance(juanito2["updated_at"], str)
+        self.assertIsInstance(juanito2["created_at"], str)
 
 
 class TestFib(unittest.TestCase):
