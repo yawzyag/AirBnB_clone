@@ -4,21 +4,38 @@ import cmd
 import json
 from shlex import split
 from models.base_model import BaseModel
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """ Command processor for HBNB\n """
+    strclasses = ["BaseModel", "State", "City", "Amenity", "Review", "Place"]
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n """
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args != "BaseModel":
+        if args not in self.strclasses:
             print("** class doesn't exist **")
             return
-        my_model = BaseModel()
+        if args == self.strclasses[0]:
+            my_model = BaseModel()
+        elif args == self.strclasses[1]:
+            my_model = State()
+        elif args == self.strclasses[2]:
+            my_model = City()
+        elif args == self.strclasses[3]:
+            my_model = Amenity()
+        elif args == self.strclasses[4]:
+            my_model = Review()
+        elif args == self.strclasses[5]:
+            my_model = Place()
         my_model.save()
         print(my_model.id)
 
@@ -28,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = args.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.strclasses:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -36,7 +53,8 @@ class HBNBCommand(cmd.Cmd):
             return
         all_objs = storage.all()
         for obj_id in all_objs.keys():
-            if obj_id.split(".")[1] != args[1]:
+            splitted = obj_id.split(".")
+            if splitted[1] != args[1] or splitted[0] != args[0]:
                 continue
             obj = all_objs[obj_id]
             print(obj)
@@ -45,11 +63,14 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Prints all string representation of all instances\n """
-        if args != "BaseModel" and len(args) > 0:
+        if args not in self.strclasses and len(args) > 0:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
         for obj_id in all_objs.keys():
+            if len(args) > 0:
+                if obj_id.split(".")[0] != args:
+                    continue
             obj = all_objs[obj_id]
             print(obj)
 
@@ -59,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = args.split()
-        if args[0] != "BaseModel":
+        if args[0] not in self.strclasses:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
@@ -67,7 +88,8 @@ class HBNBCommand(cmd.Cmd):
             return
         all_objs = storage.all()
         for obj_id in all_objs.keys():
-            if obj_id.split(".")[1] != args[1]:
+            splitted = obj_id.split(".")
+            if splitted[1] != args[1] or splitted[0] != args[0]:
                 continue
             del all_objs[obj_id]
             listm = {}
@@ -84,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] not in self.strclasses:
             print("** class doesn't exist **'")
             return
         if len(args) == 1:
@@ -98,7 +120,8 @@ class HBNBCommand(cmd.Cmd):
             return
         all_objs = storage.all()
         for obj_id in all_objs.keys():
-            if obj_id.split(".")[1] != args[1]:
+            splitted = obj_id.split(".")
+            if splitted[1] != args[1] or splitted[0] != args[0]:
                 continue
             setattr(all_objs[obj_id], args[2], args[3])
             listm = {}
@@ -114,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
         return
 
     def do_EOF(self, line):
-        "Exit\n"
+        """Exit\n"""
         return True
 
     def do_quit(self, line):
