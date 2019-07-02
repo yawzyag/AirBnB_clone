@@ -8,9 +8,10 @@ from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
-    "Command processor for HBNB\n"
+    """ Command processor for HBNB\n """
 
     def do_create(self, args):
+        """ Creates a new instance of BaseModel\n """
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -22,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
         print(my_model.id)
 
     def do_show(self, args):
+        """ Prints the string representation of an instance\n """
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -42,6 +44,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_all(self, args):
+        """ Prints all string representation of all instances\n """
         if args != "BaseModel" and len(args) > 0:
             print("** class doesn't exist **")
             return
@@ -51,6 +54,7 @@ class HBNBCommand(cmd.Cmd):
             print(obj)
 
     def do_destroy(self, args):
+        """ Deletes an instance based on the class name and id\n """
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -75,6 +79,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_update(self, args):
+        """ Update an instance of a class\n """
         args = split(args)
         if len(args) == 0:
             print("** class name missing **")
@@ -105,6 +110,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def emptyline(self):
+        """ Quit manage empty line\n """
         return
 
     def do_EOF(self, line):
@@ -112,10 +118,11 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        "Quit command to exit the program\n"
+        """ Quit command to exit the program\n """
         return True
 
 
 if __name__ == '__main__':
+    """ should not be executed when imported """
     HBNBCommand.prompt = "(hbnb) "
     HBNBCommand().cmdloop()

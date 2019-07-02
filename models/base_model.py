@@ -9,6 +9,7 @@ class BaseModel:
     """ coments of class """
 
     def __init__(self, *args, **kwargs):
+        """ init of basemodel """
         if kwargs:
             self.__updated_v(kwargs)
         else:
