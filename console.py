@@ -14,7 +14,8 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """ Command processor for HBNB\n """
-    strclasses = ["BaseModel", "State", "City", "Amenity", "Review", "Place"]
+    strclasses = ["BaseModel", "State", "City",
+                  "Amenity", "Review", "Place", "User"]
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n """
