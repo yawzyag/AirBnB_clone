@@ -3,16 +3,12 @@ import pep8
 from models.base_model import BaseModel
 
 
-def fib(n):
-    return 1 if n <= 2 else fib(n - 1) + fib(n - 2)
-
-
 def setUpModule():
-    print("setup module")
+    pass
 
 
 def tearDownModule():
-    print("teardown module")
+    pass
 
 
 class TestStringMethods(unittest.TestCase):
@@ -62,30 +58,25 @@ class TestBaseClass(unittest.TestCase):
     def test_not_existing(self):
         self.assertNotEqual(self.my_model.juanito, "no existe")
 
+    def test_instance(self):
+        self.assertIsInstance(self.my_model, BaseModel)
+
 
 class TestFib(unittest.TestCase):
 
     def setUp(self):
-        print("setUp")
-        self.n = 10
+        pass
 
     def tearDown(self):
-        print("tearDown")
-        del self.n
+        pass
 
     @classmethod
     def setUpClass(cls):
-        print("setUpClass")
+        pass
 
     @classmethod
     def tearDownClass(cls):
-        print("tearDownClass")
-
-    def test_fib_assert_equal(self):
-        self.assertEqual(fib(self.n), 55)
-
-    def test_fib_assert_true(self):
-        self.assertTrue(fib(self.n) == 55)
+        pass
 
 
 if __name__ == '__main__':
