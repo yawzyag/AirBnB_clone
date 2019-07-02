@@ -2,6 +2,7 @@
 """ module to create the console """
 import cmd
 import json
+from shlex import split
 from models.base_model import BaseModel
 from models import storage
 
@@ -74,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
         print("** no instance found **")
 
     def do_update(self, args):
-        args = args.split()
+        args = split(args)
         if len(args) == 0:
             print("** class name missing **")
             return
