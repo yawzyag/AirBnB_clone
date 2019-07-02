@@ -64,7 +64,10 @@ class TestBaseClass(unittest.TestCase):
 
     def test_save(self):
         self.assertTrue(os.path.isfile("file.json"))
+        self.assertTrue(hasattr(self.my_model, "save"))
         self.assertTrue(hasattr(self.my_model, "__init__"))
+        self.assertTrue(hasattr(self.my_model, "to_dict"))
+        self.assertTrue(hasattr(self.my_model, "__str__"))
 
 
 class TestFib(unittest.TestCase):
