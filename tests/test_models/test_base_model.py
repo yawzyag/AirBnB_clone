@@ -1,6 +1,7 @@
 import unittest
 import pep8
 from models.base_model import BaseModel
+import os
 
 
 def setUpModule():
@@ -15,7 +16,7 @@ class TestStringMethods(unittest.TestCase):
     def testpep8(self):
         style = pep8.StyleGuide(quiet=True)
         file1 = "models/base_model.py"
-        file2 = "tests/test_base.py"
+        file2 = "tests/test_models/test_base_model.py"
         check = style.check_files([file1, file2])
         self.assertEqual(check.total_errors, 0,
                          "Found code style errors (and warning).")
@@ -60,6 +61,10 @@ class TestBaseClass(unittest.TestCase):
 
     def test_instance(self):
         self.assertIsInstance(self.my_model, BaseModel)
+
+    def test_save(self):
+        self.assertTrue(os.path.isfile("file.json"))
+        self.assertTrue(hasattr(self.my_model, "__init__"))
 
 
 class TestFib(unittest.TestCase):
