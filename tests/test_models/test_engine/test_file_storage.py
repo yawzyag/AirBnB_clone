@@ -5,6 +5,7 @@ import pep8
 from models.base_model import BaseModel
 import os
 from datetime import datetime
+from models import storage
 
 
 def setUpModule():
@@ -18,8 +19,8 @@ def tearDownModule():
 class TestStringMethods(unittest.TestCase):
     def testpep8(self):
         style = pep8.StyleGuide(quiet=True)
-        file1 = "models/base_model.py"
-        file2 = "tests/test_models/test_base_model.py"
+        file1 = "models/engine/file_storage.py"
+        file2 = "tests/test_models/test_engine/test_file_storage.py"
         check = style.check_files([file1, file2])
         self.assertEqual(check.total_errors, 0,
                          "Found code style errors (and warning).")

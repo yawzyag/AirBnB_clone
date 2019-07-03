@@ -17,7 +17,7 @@ class FileStorage:
 
     dic = {"BaseModel": BaseModel, "User": User,
            "Place": Place, "State": State,
-           "Amenity": Amenity, "Review": Review}
+           "Amenity": Amenity, "Review": Review, "City": City}
 
     def all(self):
         """ returns the dictionary """

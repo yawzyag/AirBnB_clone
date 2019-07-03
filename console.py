@@ -9,12 +9,14 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """ Command processor for HBNB\n """
-    strclasses = ["BaseModel", "State", "City", "Amenity", "Review", "Place"]
+    strclasses = ["BaseModel", "State", "City",
+                  "Amenity", "Review", "Place", "User"]
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n """
@@ -36,6 +38,8 @@ class HBNBCommand(cmd.Cmd):
             my_model = Review()
         elif args == self.strclasses[5]:
             my_model = Place()
+        elif args == self.strclasses[6]:
+            my_model = User()
         my_model.save()
         print(my_model.id)
 
@@ -67,12 +71,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
+        obj = []
         for obj_id in all_objs.keys():
             if len(args) > 0:
                 if obj_id.split(".")[0] != args:
                     continue
-            obj = all_objs[obj_id]
-            print(obj)
+            obj.append(str(all_objs[obj_id]))
+        print(obj)
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id\n """
@@ -135,26 +140,6 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Quit manage empty line\n """
         return
-
-    def do_count(self, args):
-        """ retrieve the number of instances of a class """
-        args = args.split()
-        all_objs = storage.all()
-        count = 0
-        for obj_id in all_objs.keys():
-            if args[0] in obj_id:
-                count += 1
-        print(count)
-
-    def do_destroy(self, args):
-        """ destroy an instance """
-        args = args = args.split()
-        all_objs = storage.all()
-        for obj_id in all_objs.keys():
-            if args[1] in obj_id and args[0] in obj_id:
-                obj = all_objs[obj_id]
-        obj.delete()
-        storage.save()
 
     def do_EOF(self, line):
         """Exit\n"""
