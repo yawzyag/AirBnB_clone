@@ -136,6 +136,26 @@ class HBNBCommand(cmd.Cmd):
         """ Quit manage empty line\n """
         return
 
+    def do_count(self, args):
+        """ retrieve the number of instances of a class """
+        args = args.split()
+        all_objs = storage.all()
+        count = 0
+        for obj_id in all_objs.keys():
+            if args[0] in obj_id:
+                count += 1
+        print(count)
+
+    def do_destroy(self, args):
+        """ destroy an instance """
+        args = args = args.split()
+        all_objs = storage.all()
+        for obj_id in all_objs.keys():
+            if args[1] in obj_id and args[0] in obj_id:
+                obj = all_objs[obj_id]
+        obj.delete()
+        storage.save()
+
     def do_EOF(self, line):
         """Exit\n"""
         return True
