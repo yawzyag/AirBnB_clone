@@ -76,6 +76,7 @@ class TestBaseClass(unittest.TestCase):
         self.juan.save()
         self.assertIsInstance(self.juan.updated_at, datetime)
         self.assertTrue(self.juan.updated_at != juani2)
+        self.assertEqual(type(self.juan.updated_at), type(datetime.utcnow()))
 
     def test_dict(self):
         juanito2 = self.juan.to_dict()

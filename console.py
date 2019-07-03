@@ -137,6 +137,10 @@ class HBNBCommand(cmd.Cmd):
             return
         print("** no instance found **")
 
+    def do_BaseModel(self, args):
+        """ do base model """
+        self.__exe_cmd("BaseModel", args)
+
     def emptyline(self):
         """ Quit manage empty line\n """
         return
