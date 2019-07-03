@@ -2,6 +2,7 @@ import unittest
 import pep8
 from models.base_model import BaseModel
 import os
+from datetime import datetime
 
 
 def setUpModule():
@@ -62,7 +63,7 @@ class TestBaseClass(unittest.TestCase):
     def test_instance(self):
         self.assertIsInstance(self.juan, BaseModel)
 
-    def test_save(self):
+    def test_create_file(self):
         self.juan.save()
         self.assertTrue(os.path.isfile("file.json"))
         self.assertTrue(hasattr(self.juan, "save"))
@@ -70,11 +71,20 @@ class TestBaseClass(unittest.TestCase):
         self.assertTrue(hasattr(self.juan, "to_dict"))
         self.assertTrue(hasattr(self.juan, "__str__"))
 
+    def test_save(self):
+        juani2 = self.juan.updated_at
+        self.juan.save()
+        self.assertIsInstance(self.juan.updated_at, datetime)
+        self.assertTrue(self.juan.updated_at != juani2)
+        self.assertEqual(type(self.juan.updated_at), type(datetime.utcnow()))
+
     def test_dict(self):
         juanito2 = self.juan.to_dict()
         self.assertEqual(self.juan.__class__.__name__, "BaseModel")
         self.assertIsInstance(juanito2["updated_at"], str)
+        self.assertIsInstance(juanito2["id"], str)
         self.assertIsInstance(juanito2["created_at"], str)
+        self.assertIsInstance(juanito2["my_number"], int)
 
 
 class TestFib(unittest.TestCase):

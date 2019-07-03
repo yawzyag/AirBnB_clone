@@ -9,12 +9,14 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """ Command processor for HBNB\n """
-    strclasses = ["BaseModel", "State", "City", "Amenity", "Review", "Place"]
+    strclasses = ["BaseModel", "State", "City",
+                  "Amenity", "Review", "Place", "User"]
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n """
@@ -36,6 +38,8 @@ class HBNBCommand(cmd.Cmd):
             my_model = Review()
         elif args == self.strclasses[5]:
             my_model = Place()
+        elif args == self.strclasses[6]:
+            my_model = User()
         my_model.save()
         print(my_model.id)
 
@@ -67,12 +71,13 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
+        obj = []
         for obj_id in all_objs.keys():
             if len(args) > 0:
                 if obj_id.split(".")[0] != args:
                     continue
-            obj = all_objs[obj_id]
-            print(obj)
+            obj.append(str(all_objs[obj_id]))
+        print(obj)
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id\n """
@@ -131,6 +136,10 @@ class HBNBCommand(cmd.Cmd):
                 write_file.write(json.dumps(listm))
             return
         print("** no instance found **")
+
+    def do_BaseModel(self, args):
+        """ do base model """
+        self.__exe_cmd("BaseModel", args)
 
     def emptyline(self):
         """ Quit manage empty line\n """
