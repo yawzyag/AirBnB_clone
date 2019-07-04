@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
             if splitted[1] != args[1] or splitted[0] != args[0]:
                 continue
             if (args[3][-1] != "\"" and not args[3].isalpha() and
-                    " " not in args[3]):
+                    " " not in args[3] and "_" not in args[3]):
                 if "." in args[3]:
                     args[3] = float(args[3])
                 else:
