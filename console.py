@@ -128,6 +128,12 @@ class HBNBCommand(cmd.Cmd):
             splitted = obj_id.split(".")
             if splitted[1] != args[1] or splitted[0] != args[0]:
                 continue
+            if (args[3][-1] != "\"" and not args[3].isalpha() and
+                    " " not in args[3]):
+                if "." in args[3]:
+                    args[3] = float(args[3])
+                else:
+                    args[3] = int(args[3])
             setattr(all_objs[obj_id], args[2], args[3])
             listm = {}
             for key, val in all_objs.items():
@@ -136,10 +142,6 @@ class HBNBCommand(cmd.Cmd):
                 write_file.write(json.dumps(listm))
             return
         print("** no instance found **")
-
-    def do_BaseModel(self, args):
-        """ do base model """
-        self.__exe_cmd("BaseModel", args)
 
     def emptyline(self):
         """ Quit manage empty line\n """
@@ -152,6 +154,283 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, line):
         """ Quit command to exit the program\n """
         return True
+
+    def do_User(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("User")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "User":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("User " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("User " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("User " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("User " + str2 + str3 + str4)
+                        HBNBCommand().do_update("User " + str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("User " + str2 + str3 + str(j))
+
+    def do_Place(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("Place")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "Place":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("Place " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("Place " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("Place " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("Place " + str2 + str3 + str4)
+                        HBNBCommand().do_update("Place " + str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("Place " +
+                                                str2 + str3 + str(j))
+
+    def do_State(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("State")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "State":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("State " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("State " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("State " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("State " + str2 + str3 + str4)
+                        HBNBCommand().do_update("State " +
+                                                str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("State " +
+                                                str2 + str3 + str(j))
+
+    def do_City(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("City")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "City":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("City " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("City " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("City " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("City " + str2 + str3 + str4)
+                        HBNBCommand().do_update("City " +
+                                                str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("City " +
+                                                str2 + str3 + str(j))
+
+    def do_Amenity(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("Amenity")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "Amenity":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("Amenity " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("Amenity " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("Amenity " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("Amenity " + str2 + str3 + str4)
+                        HBNBCommand().do_update("Amenity " +
+                                                str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("Amenity " +
+                                                str2 + str3 + str(j))
+
+    def do_Review(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("Review")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "Review":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("Review " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("Review " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("Review " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("Review " + str2 + str3 + str4)
+                        HBNBCommand().do_update("Review " +
+                                                str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("Review " +
+                                                str2 + str3 + str(j))
+
+    def do_BaseModel(self, line):
+        if line == ".all()":
+            HBNBCommand().do_all("BaseModel")
+        if line == ".count()":
+            all_objs = storage.all()
+            contar = 0
+            for obj_id in all_objs.keys():
+                if obj_id.split(".")[0] != "BaseModel":
+                    continue
+                contar += 1
+            print(contar)
+        if line[0:6] == ".show(" and line[-1] == ")":
+            HBNBCommand().do_show("BaseModel " + line[7:-2])
+        if line[0:9] == ".destroy(" and line[-1] == ")":
+            HBNBCommand().do_destroy("BaseModel " + line[10:-2])
+        if line[0:8] == ".update(" and line[-1] == ")":
+            if line[-2] != "}":
+                str1 = line[8:-1]
+                str1 = "".join(str1.split(","))
+                HBNBCommand().do_update("BaseModel " + str1)
+            else:
+                str1 = line[8:-1]
+                str1 = str1.split(",")
+                str2 = str1[0]
+                del str1[0]
+                print(str1)
+                print(",".join(str1))
+                dict1 = eval(",".join(str1))
+                print(dict1)
+                for i, j in dict1.items():
+                    str3 = " \"" + i + "\" "
+                    if type(j) is str:
+                        str4 = "\"" + j + "\""
+                        print("BaseModel " + str2 + str3 + str4)
+                        HBNBCommand().do_update("BaseModel " +
+                                                str2 + str3 + str4)
+                    else:
+                        HBNBCommand().do_update("BaseModel " +
+                                                str2 + str3 + str(j))
 
 
 if __name__ == '__main__':
