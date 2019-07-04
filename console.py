@@ -180,15 +180,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("User " + str2 + str3 + str4)
                         HBNBCommand().do_update("User " + str2 + str3 + str4)
                     else:
                         HBNBCommand().do_update("User " + str2 + str3 + str(j))
@@ -218,15 +214,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("Place " + str2 + str3 + str4)
                         HBNBCommand().do_update("Place " + str2 + str3 + str4)
                     else:
                         HBNBCommand().do_update("Place " +
@@ -257,15 +249,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("State " + str2 + str3 + str4)
                         HBNBCommand().do_update("State " +
                                                 str2 + str3 + str4)
                     else:
@@ -297,15 +285,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("City " + str2 + str3 + str4)
                         HBNBCommand().do_update("City " +
                                                 str2 + str3 + str4)
                     else:
@@ -337,15 +321,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("Amenity " + str2 + str3 + str4)
                         HBNBCommand().do_update("Amenity " +
                                                 str2 + str3 + str4)
                     else:
@@ -377,15 +357,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("Review " + str2 + str3 + str4)
                         HBNBCommand().do_update("Review " +
                                                 str2 + str3 + str4)
                     else:
@@ -417,15 +393,11 @@ class HBNBCommand(cmd.Cmd):
                 str1 = str1.split(",")
                 str2 = str1[0]
                 del str1[0]
-                print(str1)
-                print(",".join(str1))
                 dict1 = eval(",".join(str1))
-                print(dict1)
                 for i, j in dict1.items():
                     str3 = " \"" + i + "\" "
                     if type(j) is str:
                         str4 = "\"" + j + "\""
-                        print("BaseModel " + str2 + str3 + str4)
                         HBNBCommand().do_update("BaseModel " +
                                                 str2 + str3 + str4)
                     else:
