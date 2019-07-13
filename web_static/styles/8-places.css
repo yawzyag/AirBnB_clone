@@ -73,7 +73,6 @@
 
 .image2 {
   height: 50px;
-  width: 100%;
   align-content: center;
   background-image: url("../images/icon_bed.png");
   background-repeat: no-repeat;
@@ -82,7 +81,6 @@
 
 .image3 {
   height: 50px;
-  width: 100%;
   align-content: center;
   background-image: url("../images/icon_bath.png");
   background-repeat: no-repeat;
