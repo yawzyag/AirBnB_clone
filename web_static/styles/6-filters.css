@@ -70,12 +70,24 @@
 }
 
 .popover li {
-    margin: 12px;
+    margin: 6px;
+}
+
+.popover h2 {
+  margin: 0;
 }
 
 .popover ul li {
   list-style: none;
+  padding: 0; 
+}
+.popover ul {
+  margin: 0;
+  padding: 2rem 2rem;
 }
 
+.popover ul ul {
+  padding-top: 0;
+}
 
 
