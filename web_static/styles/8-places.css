@@ -5,6 +5,10 @@
   justify-content: center;
 }
 
+.places {
+  margin-bottom: 4rem;
+}
+
 .places h1 {
   font-size: 30px;
   padding: 10px 15px;
